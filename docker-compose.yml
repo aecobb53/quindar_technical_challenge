@@ -1,0 +1,9 @@
+services:
+    app:
+        build: .
+        image: quindar_technical_challenge:latest
+        # environment:
+        #     PYTHONUNBUFFERED: 1
+        command: bash entrypoint.sh
+        ports:
+            - 8000:8000

@@ -1,1 +1,7 @@
 pandas
+
+# Daemon
+uvicorn
+fastapi
+pydantic
+
