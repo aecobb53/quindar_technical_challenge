@@ -1,9 +1,24 @@
 import pandas as pd
 import statistics
 
+import logging
+
+logger = logging.getLogger('aggregate_metrics')
+logger.setLevel(logging.DEBUG)
+logger.propagate = False
+if not logger.handlers:
+    formatter = logging.Formatter(
+        '%(asctime)s %(levelname)s %(module)s %(funcName)s - %(message)s',
+        '%Y-%m-%dT%H:%M:%SZ'
+    )
+    sh = logging.StreamHandler()
+    sh.setLevel(logging.DEBUG)
+    sh.setFormatter(formatter)
+    logger.addHandler(sh)
 
 class AggregateMetricsHandler:
     async def aggregate_metrics(self, file):
+        logger.debug('Parsing CSV file for aggregate metrics')
         df = pd.read_csv(file.file)
 
         station_metrics = {}
@@ -33,10 +48,15 @@ class AggregateMetricsHandler:
         standard_deviation_missed_bytes = statistics.stdev(total_missed_bytes_list)
 
         for station_id, metrics in station_metrics.items():
-            metrics['healthy'] = self.assess_healthiness(
+            healthy = self.assess_healthiness(
                 metrics,
                 average_missed_bytes,
                 standard_deviation_missed_bytes)
+            if healthy:
+                metrics['healthy'] = True
+            else:
+                metrics['healthy'] = False
+                logger.warning(f'Station {station_id} marked as unhealthy')
 
         return station_metrics
 
