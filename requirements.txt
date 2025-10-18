@@ -4,4 +4,4 @@ pandas
 uvicorn
 fastapi
 pydantic
-
+python-multipart
