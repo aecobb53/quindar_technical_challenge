@@ -1,6 +1,8 @@
 import pandas as pd
 import statistics
 
+from models import Telemeter, AggregateMetric
+
 # I was running low on time. This is not my finest work but it gets the job done.
 # If time permitted I would come up with a better logger with the ability to be imported and have every
 #   handler use the same logger
