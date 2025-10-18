@@ -1,8 +1,10 @@
 import pandas as pd
 import statistics
 
+# I was running low on time. This is not my finest work but it gets the job done.
+# If time permitted I would come up with a better logger with the ability to be imported and have every
+#   handler use the same logger
 import logging
-
 logger = logging.getLogger('aggregate_metrics')
 logger.setLevel(logging.DEBUG)
 logger.propagate = False
@@ -18,6 +20,9 @@ if not logger.handlers:
 
 class AggregateMetricsHandler:
     async def aggregate_metrics(self, file):
+        """
+        Aggregate metrics from a CSV file and look for discrepancies in the data to indicate unhealthy stations.
+        """
         logger.debug('Parsing CSV file for aggregate metrics')
         df = pd.read_csv(file.file)
 

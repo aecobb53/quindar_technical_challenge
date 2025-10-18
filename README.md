@@ -1,6 +1,6 @@
 # quindar_technical_challenge
 
-Im writing this to be quick and dirty, will advice later
+This service takes a daily csv of station bytes received and sent. It then looks for discrepancies.
 
 To get the container working run:
 
@@ -15,8 +15,9 @@ you can then curl it to ensure it returns the expected response
 curl localhost:8000
 ```
 
-```
-{"Hello":"World"}
+You can also interact with it in a web browser go to
+```bash
+localhost:8000/docs
 ```
 
 You can run tests with 
@@ -25,5 +26,4 @@ You can run tests with
 pytes
 ```
 
-
-Modifying to kick off git hub actions
+I have never set up git hub actions so I am quite confident I did it incorrectly!
